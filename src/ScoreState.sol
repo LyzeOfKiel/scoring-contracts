@@ -13,7 +13,7 @@ contract ScoreState is Ownable {
         uint256 score;
     }
 
-    constructor(bytes32 root) Ownable() {
+    constructor(bytes32 root) {
         roots[0] = root;
     }
 

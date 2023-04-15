@@ -2,8 +2,9 @@ pragma solidity ^0.8.13;
 
 import "./ScoreState.sol";
 import "./RewardToken.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract ExampleFaucet {
+contract ExampleFaucet is Ownable {
 	uint256 public constant FAUCET_VALUE = 1 ether;
 	RewardToken public rewardToken;
     ScoreState public scoringSystem;
@@ -12,6 +13,10 @@ contract ExampleFaucet {
     constructor(address _rewardToken, address _scoringSystem, uint256 _minScore) {
 		rewardToken = RewardToken(_rewardToken);   
         scoringSystem = ScoreState(_scoringSystem);
+        minScore = _minScore;
+    }
+
+    function setMinScore(uint256 _minScore) external onlyOwner {
         minScore = _minScore;
     }
 
